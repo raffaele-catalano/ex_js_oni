@@ -1,0 +1,255 @@
+---
+import Layout from "../layouts/Layout.astro";
+import usersData from "../data/users.json";
+---
+
+<script>
+    // Importa i dati dal file aside.json
+    import asideData from "../data/aside.json";
+    
+    // Ottieni il riferimento all'elemento <ul> dove verranno aggiunte le voci del menu
+    const menuList = document.getElementById('menu-list');
+    
+    // Itera attraverso gli elementi del menu e crea dinamicamente il markup HTML
+    asideData.menu.forEach(item => {
+
+        const listItem = document.createElement('li');
+        listItem.style.cursor = "pointer";
+        listItem.style.display = "flex";
+        listItem.style.alignItems = "center";
+        listItem.style.justifyContent = "space-between";
+        listItem.style.padding = "10px 5px";
+
+        const title = document.createElement('p');
+        title.textContent = item.title;
+
+        const icon = document.createElement('i');
+        icon.className = `${item.icon} fa-lg`;
+
+        listItem.appendChild(icon);
+        listItem.appendChild(title);
+
+        menuList.appendChild(listItem);
+    });
+</script>
+
+<Layout title="Oniverse">
+
+    <header>
+        <div class="logo-container">
+            <img src="/img/logo.png" alt="logo-oni" width="130px">
+        </div>
+        <div class="nav-container">
+            <div class="lx-cont">
+                <i class="fa-solid fa-bars fa-lg"></i>
+                <h3>Dashboard</h3>
+            </div>
+            <div class="rx-cont">
+                <div class="searchbar">
+                    <small>Search...</small>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </div>
+        <div class="user-container">
+            <div class="user-info">
+                <p>Nome Cognome</p>
+            </div>
+            <div class="user-img">
+                <img src="/img/user_placeholder.png" alt="user-oni" width="50px">
+            </div>
+        </div>
+    </header>
+
+    
+    <main>
+        <div class="main-container">
+            <aside>
+                <div class="menu-container">
+                    <ul id="menu-list">
+                        <!-- popolato dinamicamente -->
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="main-content">
+
+                <!--!!! QUI IL CONTENUTO PRINCIPALE -->
+
+                <button>
+                    <a href="/">Home</a>
+                </button>
+            </div>
+        </div>
+
+        
+        
+        
+
+
+    </main>
+</Layout>
+
+<style>
+    main {
+        margin: auto;
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+        /* debug */
+        /* border: 1px solid red; */
+    }
+
+    .main-container {
+        display: flex;
+    }
+
+    h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
+
+    button {
+		padding: 10px;
+		border: 2px solid rgba(var(--accent-light), 25%);
+		border-radius: 5px;
+		background-color: #13151A;
+		color: #FFF;
+		cursor: pointer;
+    }
+
+    button:hover {
+        background: linear-gradient(
+			rgba(var(--accent-dark), 30%),
+			rgba(var(--accent-dark), 60%)
+		);
+		color: white;
+		transition: all 0.3s ease;
+    }
+
+    button:hover a {
+        color: var(--accent-light);
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 80px;
+        padding: 0 10px;
+        color: white;
+        background-color: rgb(29, 31, 36);
+    }
+
+    header .logo-container {
+        display: flex;
+        align-items: center;
+        width: 20%;
+        height: 100%;
+        /* debug */
+        /* border: 1px solid red; */
+    }
+
+    header .logo-container img {
+        margin-top: 5px;
+        cursor: pointer;
+    }
+
+    header .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
+        height: 100%;
+        /* debug */
+        /* border: 1px solid red; */
+    }
+
+    header .nav-container .lx-cont {
+        display: flex;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+    }
+
+    header .nav-container .lx-cont i {
+        margin-right: 30px;
+        margin-top: 3px;
+        cursor: pointer;
+    }
+
+    header .nav-container .rx-cont {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+        /* border */
+        /* border: 1px solid red; */
+    }
+
+    header .nav-container .rx-cont .searchbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 60%;
+        height: 60%;
+        padding: 0 10px;
+        border-radius: 15px;
+        background-color: rgb(43, 45, 50);
+        cursor: pointer;
+    }
+
+    header .user-container {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: 20%;
+        height: 100%;
+        /* debug */
+        /* border: 1px solid red; */
+    }
+
+    header .user-container p {
+        margin: 0 12px;
+        font-weight: bold;
+        font-size: .9rem;
+    }
+
+    aside {
+        display: flex;
+        justify-content: center;
+        width: 15%;
+        height: 100vh;
+        background-color: rgb(29, 31, 36);
+    }
+
+    aside .menu-container {
+        width: 60%;
+        height: 100%;
+        padding: 20px 0;
+        /* debug */
+        /* border: 1px solid red; */
+    }   
+
+    aside .menu-container ul {
+        list-style: none;
+    }    
+</style>

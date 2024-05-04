@@ -1,0 +1,247 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<script>
+	const passwordInput = document.getElementById("pwd");
+
+	// verifica che l'elemento sia stato trovato e sia di tipo input
+	if (passwordInput instanceof HTMLInputElement) {
+
+		// creazione elemento per il toggle della visibilità della password
+		const togglePassword = document.createElement("span");
+
+		// aggiunta di contenuto e stile all'elemento creato
+		togglePassword.innerHTML = `<i class="fa-solid fa-eye fa-xs"></i>`;
+		togglePassword.style.cursor = "pointer";
+		togglePassword.style.position = "absolute";
+		togglePassword.style.right = "10px";
+		togglePassword.style.top = "65%";
+		togglePassword.style.transform = "translateY(-50%)";
+
+		// aggiunta del toggle alla gerarchia DOM
+		if (passwordInput.parentNode instanceof HTMLElement) {
+			passwordInput.parentNode.style.position = "relative";
+			passwordInput.parentNode.appendChild(togglePassword);
+		}
+
+		// aggiunta dell'evento al click sul toggle per mostrare/nascondere la password
+		togglePassword.addEventListener("click", function () {
+			const type =
+				passwordInput.getAttribute("type") === "password"
+					? "text"
+					: "password";
+			passwordInput.setAttribute("type", type);
+		});
+	} else {
+		console.error(
+			"Impossibile trovare l'input della password o non è di tipo input",
+		);
+	}
+
+	// mporta i dati del json con email e password degli utenti validi
+	import usersData from "../data/users.json";
+
+	// funzione per verificare le credenziali dell'utente
+	function checkCredentials(email, password) {
+		const user = usersData.users.find(
+			(user) => user.email === email && user.password === password,
+		);
+
+		// if (user) {
+		// 	console.log("Accesso consentito!");
+		// } else {
+		// 	console.log("Credenziali non valide. Accesso negato.");
+		// }
+
+		return user !== undefined;
+	}
+
+	// funzione per mostrare un messaggio di errore per 5 secondi in caso di credenziali non valide
+	function showError(message) {
+
+		const errorMessage = document.createElement("p");
+		errorMessage.textContent = message;
+		errorMessage.style.border = "1px solid crimson";
+		errorMessage.style.padding = "10px";
+		errorMessage.style.borderRadius = "5px";
+		errorMessage.style.color = "crimson";
+		errorMessage.style.display = "block";
+
+		document.querySelector(".error-container").appendChild(errorMessage);
+		
+		setTimeout(() => {
+			errorMessage.style.display = "none";
+			errorMessage.remove();
+		}, 5000);
+	}
+	
+	// aggiunta di un evento di submit al form
+	document.querySelector("form").addEventListener("submit", function (event) {
+
+		event.preventDefault(); // evita il comportamento predefinito del submit
+
+		// ottenimento dei valori di username e password dal form
+		const emailInput = document.getElementById("email");
+		const passwordInput = document.getElementById("pwd");
+
+		// verifica che gli elementi siano stati trovati e siano di tipo input
+		if (emailInput instanceof HTMLInputElement && passwordInput instanceof HTMLInputElement) {
+
+			// prende il valore inserito nel campo username e nel campo password
+			const email = emailInput.value;
+			const password = passwordInput.value;
+
+			// controllo delle credenziali richiamando la funzione checkCredentials
+			const isValid = checkCredentials(email, password);
+
+			// se le credenziali sono valide, reindirizza alla pagina /landing
+			if (isValid) {
+				window.location.href = "/landing";
+			} else {
+				// se le credenziali non sono valide, mostra un messaggio di errore richiamando la funzione showError
+				showError("Credenziali non valide. Accesso negato.");
+			}
+		} else {
+			// messaggio in console impostanto per il
+			console.error(
+				"Impossibile trovare gli input dell'username e della password o non sono di tipo input",
+			);
+		}
+	});
+</script>
+
+<Layout title="Oniverse">
+	<main>
+		<h1>Welcome to <span class="text-gradient">Oniverse</span></h1>
+		<p class="instructions">
+			To get started, <code>sign-in</code> with your credentials.
+		</p>
+
+		<div class="error-container">
+
+		</div>
+
+		<div class="form-container instructions">
+			<form action="" method="">
+				<label for="username">Email</label>
+				<input
+					type="email"
+					name="email"
+					id="email"
+					placeholder="pippo@oniverse.com"
+					autocomplete="off"
+					required
+				/>
+				<label for="pwd">Password</label>
+				<input
+					type="password"
+					name="pwd"
+					id="pwd"
+					placeholder="******"
+					autocomplete="off"
+					minlength="8"
+					required
+				/>
+				<button type="submit">Sign in</button>
+			</form>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		width: 800px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	h1 {
+		font-size: 4rem;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(
+			rgba(var(--accent-dark), 66%),
+			rgba(var(--accent-dark), 33%)
+		);
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+
+	.error-container {
+		display: flex;
+		justify-content: center;
+		width: 50%;
+		margin-bottom: 26px;
+	}
+
+	.form-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.form-container form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.form-container form input {
+		margin-bottom: 1rem;
+		padding: 10px;
+		border: 2px solid rgba(var(--accent-light), 25%);
+		border-radius: 5px;
+		background-color: #13151A;
+		color: #FFF;
+	}
+
+	.form-container form button {
+		padding: 10px;
+		border: 2px solid rgba(var(--accent-light), 25%);
+		border-radius: 5px;
+		background-color: #13151A;
+		color: #FFF;
+		cursor: pointer;
+	}
+
+	.form-container form button:hover {
+		background: linear-gradient(
+			rgba(var(--accent-dark), 30%),
+			rgba(var(--accent-dark), 60%)
+		);
+		color: white;
+		transition: all 0.3s ease;
+	}
+</style>

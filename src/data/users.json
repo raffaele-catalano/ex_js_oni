@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "username": "gigi_wolf",
+            "name" : "Luigi",
+            "surname": "Wolf",
+            "email": "luigiwolf@oniverse.com",
+            "password": "33333333"
+        },
+        {
+            "username": "ale_vamonos",
+            "name" : "Ale",
+            "surname": "Vamonos",
+            "email": "alevamonos@oniverse.com",
+            "password": "33333333"
+        },
+        {
+            "username": "rob_raf",
+            "name" : "Rob",
+            "surname": "Raf",
+            "email": "robraf@oniverse.com",
+            "password": "33333333"
+        }
+    ]
+}

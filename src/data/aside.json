@@ -1,0 +1,28 @@
+{
+    "menu": [
+        {
+            "title": "Dashboard",
+            "icon" : "fa-solid fa-table-columns"
+        },
+        {
+            "title": "Analytic",
+            "icon" : "fa-solid fa-chart-simple"
+        },
+        {
+            "title": "Timesheets",
+            "icon" : "fa-solid fa-timeline"
+        },
+        {
+            "title": "Todo",
+            "icon" : "fa-solid fa-clipboard-list"
+        },
+        {
+            "title": "Report",
+            "icon" : "fa-solid fa-file"
+        },
+        {
+            "title": "Settings",
+            "icon" : "fa-solid fa-gear"
+        }
+    ]
+}
