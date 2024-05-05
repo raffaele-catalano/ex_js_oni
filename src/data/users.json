@@ -3,22 +3,25 @@
         {
             "username": "gigi_wolf",
             "name" : "Luigi",
-            "surname": "Wolf",
+            "surname": "Cervo",
             "email": "luigiwolf@oniverse.com",
+            "role": "IT Developer",
             "password": "33333333"
         },
         {
             "username": "ale_vamonos",
-            "name" : "Ale",
-            "surname": "Vamonos",
+            "name" : "Alessandro",
+            "surname": "Mennella",
             "email": "alevamonos@oniverse.com",
+            "role": "IT Developer",
             "password": "33333333"
         },
         {
-            "username": "rob_raf",
-            "name" : "Rob",
-            "surname": "Raf",
-            "email": "robraf@oniverse.com",
+            "username": "raf_el_prof",
+            "name" : "Raffaele",
+            "surname": "Catalano",
+            "email": "rafprofe@oniverse.com",
+            "role": "IT Developer",
             "password": "33333333"
         }
     ]
