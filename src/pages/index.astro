@@ -7,7 +7,6 @@ import Layout from "../layouts/Layout.astro";
 
 	// verifica che l'elemento sia stato trovato e sia di tipo input
 	if (passwordInput instanceof HTMLInputElement) {
-
 		// creazione elemento per il toggle della visibilità della password
 		const togglePassword = document.createElement("span");
 
@@ -59,7 +58,6 @@ import Layout from "../layouts/Layout.astro";
 
 	// funzione per mostrare un messaggio di errore per 5 secondi in caso di credenziali non valide
 	function showError(message) {
-
 		const errorMessage = document.createElement("p");
 		errorMessage.textContent = message;
 		errorMessage.style.border = "1px solid crimson";
@@ -69,16 +67,15 @@ import Layout from "../layouts/Layout.astro";
 		errorMessage.style.display = "block";
 
 		document.querySelector(".error-container").appendChild(errorMessage);
-		
+
 		setTimeout(() => {
 			errorMessage.style.display = "none";
 			errorMessage.remove();
 		}, 5000);
 	}
-	
+
 	// aggiunta di un evento di submit al form
 	document.querySelector("form").addEventListener("submit", function (event) {
-
 		event.preventDefault(); // evita il comportamento predefinito del submit
 
 		// ottenimento dei valori di username e password dal form
@@ -86,8 +83,10 @@ import Layout from "../layouts/Layout.astro";
 		const passwordInput = document.getElementById("pwd");
 
 		// verifica che gli elementi siano stati trovati e siano di tipo input
-		if (emailInput instanceof HTMLInputElement && passwordInput instanceof HTMLInputElement) {
-
+		if (
+			emailInput instanceof HTMLInputElement &&
+			passwordInput instanceof HTMLInputElement
+		) {
 			// prende il valore inserito nel campo username e nel campo password
 			const email = emailInput.value;
 			const password = passwordInput.value;
@@ -97,6 +96,11 @@ import Layout from "../layouts/Layout.astro";
 
 			// se le credenziali sono valide, reindirizza alla pagina /landing
 			if (isValid) {
+				// memorizzazione delle informazioni dell'utente nel localStorage
+				const loggedInUser = usersData.users.find(user => user.email === email);
+
+				localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+				// se le credenziali sono ok si viene reindirizzati alla pagina /landing
 				window.location.href = "/landing";
 			} else {
 				// se le credenziali non sono valide, mostra un messaggio di errore richiamando la funzione showError
@@ -118,9 +122,7 @@ import Layout from "../layouts/Layout.astro";
 			To get started, <code>sign-in</code> with your credentials.
 		</p>
 
-		<div class="error-container">
-
-		</div>
+		<div class="error-container"></div>
 
 		<div class="form-container instructions">
 			<form action="" method="">
@@ -223,16 +225,16 @@ import Layout from "../layouts/Layout.astro";
 		padding: 10px;
 		border: 2px solid rgba(var(--accent-light), 25%);
 		border-radius: 5px;
-		background-color: #13151A;
-		color: #FFF;
+		background-color: #13151a;
+		color: #fff;
 	}
 
 	.form-container form button {
 		padding: 10px;
 		border: 2px solid rgba(var(--accent-light), 25%);
 		border-radius: 5px;
-		background-color: #13151A;
-		color: #FFF;
+		background-color: #13151a;
+		color: #fff;
 		cursor: pointer;
 	}
 
