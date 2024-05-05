@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <script>
+	// viene recuperato l'input della password
 	const passwordInput = document.getElementById("pwd");
 
 	// verifica che l'elemento sia stato trovato e sia di tipo input
@@ -26,19 +27,26 @@ import Layout from "../layouts/Layout.astro";
 
 		// aggiunta dell'evento al click sul toggle per mostrare/nascondere la password
 		togglePassword.addEventListener("click", function () {
-			const type =
-				passwordInput.getAttribute("type") === "password"
-					? "text"
-					: "password";
+			// modifica il tipo di input tra password e testo (per renderlo visibile o non visibile)
+			const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+
 			passwordInput.setAttribute("type", type);
+
+			// viene recuperata l'icona dell'occhio
+			const eyeIcon = togglePassword.querySelector("i");
+
+			// creazione del toggle che cambia anche l'icona da occhio a occhio barrato
+			if (eyeIcon) {
+				eyeIcon.classList.toggle("fa-eye");
+				eyeIcon.classList.toggle("fa-eye-slash");
+			}
 		});
 	} else {
-		console.error(
-			"Impossibile trovare l'input della password o non è di tipo input",
-		);
+		console.error("Impossibile trovare l'input della password o non è di tipo input");
 	}
 
-	// mporta i dati del json con email e password degli utenti validi
+
+	// importa i dati del json con email e password degli utenti validi
 	import usersData from "../data/users.json";
 
 	// funzione per verificare le credenziali dell'utente
