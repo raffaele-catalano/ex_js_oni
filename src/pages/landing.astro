@@ -36,6 +36,21 @@ import usersData from "../data/users.json";
         // append del <li> all' <ul>
         menuList.appendChild(listItem);
     });
+
+    // recupero le informazioni dell'utente dal localStorage (salvati in fase di login in index)
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    // Verifica se l'utente è loggato
+    if (loggedInUser) {
+        // ottienimento di nome,cognome e ruolo dell'utente loggato
+        const { name, surname, role } = loggedInUser;
+        // popola dinamicamente il testo nel p e nello small della sezione user-info
+        document.querySelector(".user-info p").textContent = `${name} ${surname}`;
+        document.querySelector(".user-info small").textContent = `${role}`;
+    } else {
+        // se l'utente non è loggato, reindirizza alla pagina di login
+        window.location.href = "/";
+    }
 </script>
 
 <Layout title="Oniverse">
@@ -62,10 +77,10 @@ import usersData from "../data/users.json";
             </div>
             <div class="user-info">
 
-                <!-- ! -->
-                <!--? TODO: PRENDERE I NOMI E COGNOMI DALLA LISTA UTENTI  ?-->
-                <!-- ! -->
-                <p>Nome Cognome</p>
+                <!-- ! i successivi tag (p, small) vengono popolati dinamicamente ! -->
+                <p></p>
+                <small></small>
+                <!-- !! -->
 
             </div>
             <div class="user-img">
@@ -248,6 +263,10 @@ import usersData from "../data/users.json";
         margin: 0 12px;
         font-weight: bold;
         font-size: .9rem;
+    }
+
+    header .user-container small {
+        margin: 0 12px;
     }
 
     aside {
