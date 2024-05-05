@@ -4,15 +4,16 @@ import usersData from "../data/users.json";
 ---
 
 <script>
-    // Importa i dati dal file aside.json
+    // importo i dati dal file aside.json
     import asideData from "../data/aside.json";
     
-    // Ottieni il riferimento all'elemento <ul> dove verranno aggiunte le voci del menu
+    // ottenimento del riferimento all'elemento <ul> dove verranno aggiunte le voci (li) del menu
     const menuList = document.getElementById('menu-list');
     
-    // Itera attraverso gli elementi del menu e crea dinamicamente il markup HTML
+    // iterazione con un foreach degli elementi del menu
     asideData.menu.forEach(item => {
 
+        // creazione elemento li e aggiunta stili
         const listItem = document.createElement('li');
         listItem.style.cursor = "pointer";
         listItem.style.display = "flex";
@@ -20,15 +21,19 @@ import usersData from "../data/users.json";
         listItem.style.justifyContent = "space-between";
         listItem.style.padding = "10px 5px";
 
+        // creazione elemento p e aggiunta contenuto dinamicamente prelevando da aside.json
         const title = document.createElement('p');
         title.textContent = item.title;
-
+        
+        // creazione elemento i e aggiunta contenuto dinamicamente prelevando da aside.json
         const icon = document.createElement('i');
         icon.className = `${item.icon} fa-lg`;
 
+        // append del <p> e del <i> al <li>
         listItem.appendChild(icon);
         listItem.appendChild(title);
-
+        
+        // append del <li> all' <ul>
         menuList.appendChild(listItem);
     });
 </script>
@@ -41,8 +46,8 @@ import usersData from "../data/users.json";
         </div>
         <div class="nav-container">
             <div class="lx-cont">
-                <i class="fa-solid fa-bars fa-lg"></i>
-                <h3>Dashboard</h3>
+                <i class="fa-solid fa-bars fa-lg fa-bounce"></i>
+                <h2>Dashboard</h2>
             </div>
             <div class="rx-cont">
                 <div class="searchbar">
@@ -53,10 +58,15 @@ import usersData from "../data/users.json";
         </div>
         <div class="user-container">
             <div class="notification-container">
-                <i class="fa-solid fa-bell fa-lg"></i>
+                <i class="fa-solid fa-bell fa-lg fa-shake"></i>
             </div>
             <div class="user-info">
+
+                <!-- ! -->
+                <!--? TODO: PRENDERE I NOMI E COGNOMI DALLA LISTA UTENTI  ?-->
+                <!-- ! -->
                 <p>Nome Cognome</p>
+
             </div>
             <div class="user-img">
                 <img src="/img/user_placeholder.png" alt="user-oni" width="50px">
@@ -70,14 +80,14 @@ import usersData from "../data/users.json";
             <aside>
                 <div class="menu-container">
                     <ul id="menu-list">
-                        <!-- popolato dinamicamente -->
+                        <!-- popolato dinamicamente  -->
                     </ul>
                 </div>
             </aside>
 
             <div class="main-content">
 
-                <!--!!! QUI IL CONTENUTO PRINCIPALE -->
+                <!--!!! QUI IL CONTENUTO PRINCIPALE !!!-->
 
                 <button>
                     <a href="/">Home</a>
@@ -194,7 +204,7 @@ import usersData from "../data/users.json";
 
     header .nav-container .lx-cont i {
         margin-right: 30px;
-        margin-top: 3px;
+        margin-top: 4px;
         cursor: pointer;
     }
 
@@ -228,6 +238,10 @@ import usersData from "../data/users.json";
         height: 100%;
         /* debug */
         /* border: 1px solid red; */
+    }
+
+    header .user-container .notification-container i {
+        color: gold;
     }
 
     header .user-container p {
