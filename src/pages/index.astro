@@ -12,11 +12,12 @@ import Layout from "../layouts/Layout.astro";
 		const togglePassword = document.createElement("span");
 
 		// aggiunta di contenuto e stile all'elemento creato
-		togglePassword.innerHTML = `<i class="fa-solid fa-eye fa-xs"></i>`;
+		togglePassword.innerHTML = `<i class="fa-solid fa-eye fa-sm"></i>`;
 		togglePassword.style.cursor = "pointer";
 		togglePassword.style.position = "absolute";
-		togglePassword.style.right = "10px";
-		togglePassword.style.top = "65%";
+		togglePassword.style.right = "1px";
+		togglePassword.style.top = "64%";
+		togglePassword.style.color = "rgb(86,50,122)";
 		togglePassword.style.transform = "translateY(-50%)";
 
 		// aggiunta del toggle alla gerarchia DOM
@@ -217,9 +218,12 @@ import Layout from "../layouts/Layout.astro";
 	}
 
 	.form-container {
+		width: 60%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		/* debug */
+		/* border: 1px solid red; */
 	}
 
 	.form-container form {
@@ -229,12 +233,15 @@ import Layout from "../layouts/Layout.astro";
 	}
 
 	.form-container form input {
+		width: 120%;
 		margin-bottom: 1rem;
 		padding: 10px;
 		border: 2px solid rgba(var(--accent-light), 25%);
 		border-radius: 5px;
 		background-color: #13151a;
 		color: #fff;
+		/* debug */
+		/* border: 1px solid red; */
 	}
 
 	.form-container form button {
